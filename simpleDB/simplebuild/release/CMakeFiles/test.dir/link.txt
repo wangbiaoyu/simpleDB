@@ -1,0 +1,1 @@
+/usr/bin/c++   -O3 -DNDEBUG    CMakeFiles/test.dir/fxxx.cpp.o CMakeFiles/test.dir/home/llfi/simpleDB/simpleDB/HashIndex.cpp.o  -o test -rdynamic 

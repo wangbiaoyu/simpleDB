@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/llfi/simpleDB/simpleDB/HashIndex.h
+map
+-
+vector
+-
+
+/home/llfi/simpleDB/simpleDB/test/fxxx.cpp
+stdio.h
+-
+stdlib.h
+-
+assert.h
+-
+../HashIndex.h
+/home/llfi/simpleDB/simpleDB/HashIndex.h
+string
+-
+
