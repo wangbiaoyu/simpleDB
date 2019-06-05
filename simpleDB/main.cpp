@@ -4,17 +4,25 @@
 #include <memory.h>
 using namespace std;
 
+string undo_dir = "/home/llfi/simpleDB/DB/undoDir/";
+string redo_dir = "/home/llfi/dimpleDB/DB/redoDir/";
+
 int main(int argc,char* argv[])
 {
     printf("welcome to the DB world\n");
     char cmd[81];
-    printf("simpleDB: ");
+    //todo check undo log and redo log dir
+    UndoLog* undo = new UndoLog(undo_dir);
+    RedoLog* redo = new RedoLog(redo_dir);
+    redo->recovery();
+    undo->recovery();
+    printf("simpleDB:> ");
     while(cin.getline(cmd,81)){
 	//if(strcmp(cmd,"q") == 0) break;
 	Lex_ana* ana =	new Lex_ana(cmd);
 	ana->getOpCode();
 	memset(cmd,0,81);
-	printf("simpleDB: ");
+	printf("simpleDB:> ");
     }   
     return 0;
 }

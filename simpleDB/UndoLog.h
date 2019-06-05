@@ -3,9 +3,14 @@
 class UndoLog{
 
 public:
-    UndoLog(const VS& tokens);
 
-private:
+    UndoLog(std::string dir);
+    void append(string operation);
+    void fsync();
     
+private:
+
+    VS records_;
+    string dir;
 
 }

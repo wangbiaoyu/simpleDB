@@ -17,14 +17,15 @@ File::File(HashIndex* node){
 
 /***
     info  : save a table node to file
-    prams : a node express a table
+    prams : a node express a table,quick_flush(flush buf to disk
     return:
 ***/
-void File::save(HashIndex* node){
+void File::save(HashIndex* node,bool quick_flush){
     string table = path1 + node->table_;
     std::ofstream fd(table.c_str(),ios::app);
     boost::archive::text_oarchive oa(fd);
     oa << *node;
+    if(quick_flush == true) flush(fd);
     fd.close();
 }
 
@@ -33,12 +34,13 @@ void File::save(HashIndex* node){
     prams : table , load(to save
     return:
 ***/
-void File::load(HashIndex* load,string table){
+void File::load(HashIndex* load,string table,bool quick_flush){
     string table1 = path1 + table;
     printf("%s\n",table1.c_str());
     std::ifstream fd(table1.c_str());
     boost::archive::text_iarchive ia(fd);
     ia >> *load; 
+    if(quick_flush == true) flush(fd);
     fd.close();
 }
 
@@ -71,7 +73,7 @@ HashIndex* File::getDiskTable(string table){
     if(table.empty()) return NULL;
     if(tableExist(table) == false) return NULL;
     HashIndex* node = new HashIndex();
-    load(node,table);
+    load(node,table,false);
     return node;
 }
 
@@ -82,6 +84,15 @@ HashIndex* File::getDiskTable(string table){
     return:
 ***/
 void File::writeToDisk(HashIndex* node){
-    save(node);
+    save(node,false);
+}
+
+/***
+    info  : quick flush cache to disk
+    prams :
+    return:
+***/
+void File::flushCache(HashIndex* node){
+    
 }
 

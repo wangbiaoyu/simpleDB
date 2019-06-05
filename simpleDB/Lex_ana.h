@@ -1,5 +1,8 @@
 #pragma once
 
+#include "UndoLog.h"
+#include "RedoLog.h"
+
 #include <vector>
 #include <string>
 using namespace std;
@@ -20,4 +23,3 @@ private:
     const char* cur_cmd;
     int op;
 };
-
