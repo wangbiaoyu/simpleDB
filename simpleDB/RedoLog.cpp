@@ -1,4 +1,5 @@
 #include "RedoLog.h"
+#include "File.h"
 
 RedoLog::RedoLog(string redo,string db) 
    :redoDir(redo),
@@ -7,9 +8,17 @@ RedoLog::RedoLog(string redo,string db)
     
 }   
 
+/***
+    info  : flush to disk row nom
+    prams :
+    return:
+***/
 void RedoLog::appendToRedoLog(HashIndex* node){
     //Mutex Lock
-    file->save(node);
+    //File* file = new File(node,redoDir);
+    //HashIndex* node_to_redo = file->getDiskTable(node->table_);
+    File* file1 = new File(node,HashIndex::redoDir);
+    file1->writeToDisk(node,true);
 }
 
 /***
@@ -17,13 +26,15 @@ void RedoLog::appendToRedoLog(HashIndex* node){
     prams : file directory
     return:
 ***/
-void RedoLog::recover(string dir){
-    HashIndex* head = file->getAllDiskTable(dir),node;
+void RedoLog::recovery(){
+    HashIndex* head = NULL,*node;
+    File* file = new File(head,HashIndex::redoDir);
+    head = file->getAllDiskTable();
     node = head;
     if(head == NULL) return ;
+    File* file1 = new File(node,HashIndex::dbDir);
     while(node != NULL){
-	File::save(node,true);
+	file1->writeToDisk(node,true);
 	node = node->next;
     }  
 }
-

@@ -10,7 +10,7 @@ class Insert{
 public:
 
     Insert(const vector<string>& tokens,Table* table_);
-    void appendToCache()();
+    void appendToCache();
     
 private:
  

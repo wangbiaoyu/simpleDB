@@ -2,19 +2,24 @@
 #include <stdio.h>
 #include <iostream>
 #include "File.h"
+#include "HashIndex.h"
 
 using namespace std;
 
 //creat table user.db (id,name,age)
 
-Table::Table(){
-    printf("");
+Table::Table(string dir)
+    :dbDir(dir)
+{
+
 }
 
 void Table::creatTable(const vector<string>& tokens){
     //printf("tokens size %d\n",tokens.size());
     HashIndex* head = getTable(tokens[2]);
-    if(head == NULL){
+    File* file = new File(head,HashIndex::dbDir);
+    HashIndex* disk = file->getDiskTable(tokens[2]);
+    if(head == NULL && disk == NULL){
 	head = new HashIndex(tokens[2]);
 	VS vs(1,tokens[3]);
 	head->records_[tokens[3]] = vs;
@@ -59,9 +64,9 @@ HashIndex* Table::getTable(string table){
 Table::~Table(){
     //printf("~Table()\n");
     if(db_ != NULL){
-	File* file = new File(db_);
+	File* file = new File(db_,dbDir);
 	while(db_ != NULL){
-	    file->writeToDisk(db_);
+	    file->writeToDisk(db_,false);
 	    db_ = db_->next;
 	}
     }   

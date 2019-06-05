@@ -1,6 +1,7 @@
 #include "UndoLog.h"
-#include "Mutex.h"
-#include "Condition.h"
+#include "File.h"
+//#include "/base/Mutex.h"
+//#include "/base/Condition.h"
 
 #include <stdio.h>
 #include <unistd.h>
@@ -10,10 +11,11 @@
     prams : operation records
     return:
 ***/
-UndoLog::UndoLog(string dir)
-    :dir_(dir),
-    mutex_(),
-    cond_(mutex_)
+UndoLog::UndoLog(string undo,string db)
+    :undoDir(undo),
+    dbDir(db)
+    //mutex_(),
+    //cond_(mutex_)
 {
     
 }
@@ -23,19 +25,23 @@ UndoLog::UndoLog(string dir)
     prams : op(like insert into 
     return:
 ***/
-void UndoLog::appendToUndoLog(MVS op){
+void UndoLog::appendToUndoLog(HashIndex* node){
     //Mutex lock
-    string path  = dir_ + filename;
-    ofstream file = fopen(path.c_str(),ios::out|ios::app);
-    save(node);
+    File* file = new File(node,HashIndex::undoDir);
+    HashIndex* node_to_redo = file->getDiskTable(node->table_);
+    File* file1 = new File(node_to_redo,HashIndex::undoDir);
+    file1->writeToDisk(node,true);
 }
 
 void UndoLog::recovery(){
-    HashIndex* head = file->getAllDiskTable(dir),node;
+    HashIndex* node = NULL;
+    File* file = new File(node,HashIndex::undoDir);
+    HashIndex* head = file->getAllDiskTable();
     if(head == NULL) return;
+    File* file1 = new File(head,HashIndex::dbDir);
     node = head;
     while(node != NULL){
-	file->save(node,true);
+	file1->writeToDisk(node,true);
 	node = node->next;
     }
 }

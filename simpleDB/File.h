@@ -6,19 +6,24 @@
 class File{
 
 public:
-    File(HashIndex* head);
+
+    File(HashIndex* head,string dir);
     void flush();
     void readn(string );
     bool tableExist(string table);
     HashIndex* getDiskTable(string table);
-    void writeToDisk(HashIndex* node);
+    HashIndex* getAllDiskTable();
+    void writeToDisk(HashIndex* node,bool );
        
 private:
-    void save(HashIndex* );
-    void load(HashIndex* ,string );
+
+    void save(HashIndex* ,bool );
+    void load(HashIndex* ,string ,bool );
 
 private:
+
     HashIndex* head_;
+    string path1;
 
 };
 

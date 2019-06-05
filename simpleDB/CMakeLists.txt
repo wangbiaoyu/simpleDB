@@ -8,6 +8,8 @@ set(SRCS
     State_code.cpp
     HashIndex.cpp
     File.cpp
+    UndoLog.cpp
+    RedoLog.cpp
 )
 
 

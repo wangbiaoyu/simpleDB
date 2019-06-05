@@ -1,5 +1,10 @@
 #include "HashIndex.h"
 #include <assert.h>
+#include <stdio.h>
+
+string HashIndex::dbDir = "/home/llfi/simpleDB/DB/dbDir/";
+string HashIndex::undoDir = "/home/llfi/simpleDB/DB/undoDir/";
+string HashIndex::redoDir = "/home/llfi/simpleDB/DB/redoDir/";
 
 HashIndex::HashIndex()
     :table_(""),

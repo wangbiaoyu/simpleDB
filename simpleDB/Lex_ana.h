@@ -22,4 +22,6 @@ private:
     vector<const char *> his_cmd;
     const char* cur_cmd;
     int op;
+public:
+    static string dir;// = "/home/llfi/simpleDB/DB/dbDir/";
 };

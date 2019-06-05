@@ -26,9 +26,11 @@ public:
     friend class Insert;
     //friend class Select;
     ~Table();
-    Table();
+    Table(string dir);
 
 private:
+    
     HashIndex* db_; 
     HashIndex* diskDB_; 
+    string dbDir;
 };

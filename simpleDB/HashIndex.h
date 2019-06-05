@@ -34,17 +34,12 @@ private:
 	ar & next;
     }
 
-    /*void save(HashIndex& hs){
-	std::ofstream ofs("data");
-	boost::archive::text_iarchive oa(ofs);
-	oa << hs;
-    }
+public:
 
-    void load(const HashIndex& hs){
-	std::ifstream ifs("data");
-	boost::archive::text_iarchive ia(ifs);
-	ifs >> hs;
-    }*/
+    static string dbDir;
+    static string undoDir;
+    static string redoDir;
+
 public:
     string table_;
     MVS records_;

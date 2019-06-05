@@ -32,7 +32,7 @@ void Select::selectAll(Table* table,string tab){
     if(mem_node != NULL){
 	mem_node->printNodeData(mem_node);
     }
-    File* file = new File(mem_node);
+    File* file = new File(mem_node,HashIndex::dbDir);
     HashIndex* disk_node = file->getDiskTable(tab);
     if(disk_node != NULL){
 	disk_node->printNodeData(disk_node);

@@ -6,13 +6,13 @@ class RedoLog{
     
 public:
     
-    RedoLog();
+    RedoLog(string redo,string db);
     void appendToRedoLog(HashIndex* node);
-    void recover();
+    void recovery();
 
 private:
     
-    string redoDir_;
-    string dbDir_;
+    string redoDir;
+    string dbDir;
 
 };

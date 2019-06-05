@@ -12,7 +12,7 @@ void once_init();
 void initInstance();
 static pthread_once_t once_control_ = PTHREAD_ONCE_INIT;
 static Table* table_;
-
+string Lex_ana::dir = "/home/llfi/simpleDB/DB/dbDir/";
 Lex_ana::Lex_ana(const char* cmd)
 {
     cur_cmd = cmd;
@@ -85,5 +85,5 @@ void initInstance(){
 }
 
 void once_init(){
-    table_ = new Table();
+    table_ = new Table(Lex_ana::dir);
 }
