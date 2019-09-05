@@ -1,0 +1,1 @@
+/home/user/code/simpleDB/common/test/CMakeFiles/log_test.dir

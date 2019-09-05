@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/log_test.dir/home/user/code/simpleDB/common/log.cc.o CMakeFiles/log_test.dir/log_test.cc.o  -o log_test -rdynamic -lpthread -lrt 

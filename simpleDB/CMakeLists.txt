@@ -19,4 +19,4 @@ target_link_libraries(simpleDB pthread rt)
 
 target_link_libraries(simpleDB -lboost_serialization)
 
-add_subdirectory(test)
+#add_subdirectory(test)
