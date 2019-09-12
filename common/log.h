@@ -22,6 +22,11 @@ namespace common
 	//extern void setLevel();
 	extern void setFileSize();
 	extern void Logv(int level,va_list vl);
+
+	class LogStream{
+		void operator<<(int num);
+		void operator<<(double num);
+	};
 }
 
 
