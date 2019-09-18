@@ -14,22 +14,32 @@ namespace kvDB
 {
 	
 	DBImpl::DBImpl(Option op,const string& dbname)
-	:	op_(op)
+	:	env_(op.env)
 	,	dbname_(dbname)
-	,	mem_(new memTable())
-	, 	imm_(NULL)
-    ,   
+	,	mem_(new MemTable())
+	, 	imm_(NULL)   
 	{
-					
+						
 	}
 
 	Status DBImpl::Recover(VertionEdit edit){
 		Status s;
-		s = env_.CreatDir(dbname_);
+		s = env_->CreateDir(dbname_);
         if(!s.ok()){
 			::common::LOG(::common::ERROR,"create dir error");
 		}
-	    if(env_)	
+	    if(!env_->FileExist(CurrentFile(dbname_))){
+			if(option.create_if_missing){
+				s = NewDB();
+			}else{
+				
+			}
+		}	
+	}
+
+	Status DBImpl::NewDB(){
+		VersionEdit new_edit;
+		
 	}
 
 	Status DB::Open(Option op,const string& dbname,DB** ptr){
@@ -40,8 +50,8 @@ namespace kvDB
         if(!s.ok()){
             LOG(::common::BUG,"recover error!");
         }
-
+		
+		
 	}	
-    
-    
+        
 }

@@ -6,4 +6,16 @@
 
 #pragma once
 
-
+namespace kvDB
+{
+	class Env{
+	
+	public:
+		Env();
+		~Env();
+		void CreateDir(const string& dbname);
+		void CreateFile(const string& file)
+	private:
+		
+	};
+}
