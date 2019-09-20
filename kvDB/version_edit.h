@@ -4,21 +4,24 @@
  *
  ***/
 #pragma once
+#include "dbformat.h"
 
 namespace kvDB
 {
-	class SequenceNumer{
 	
-	public:
-	};
 	class VersionEdit{
 		
 	public:
 		VersionEdit() { Clear(); }
 		void Clear();
-		void SetLog
-
+		void SetLogNumber(SequenceNumber num);
+		void SetNextLogNumber(SequenceNumber num);
+		
+		void EncodeTo(const string& dst);
 	private:
-		static
+		bool has_log_number;
+		bool has_next_log_number;
+		SequenceNumber log_number_;
+		SequenceNumber next_log_number_;
 	};
 }

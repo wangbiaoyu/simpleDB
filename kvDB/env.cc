@@ -19,3 +19,11 @@ namespace kvDB
 		return res;
 	}
 
+	Status Env::DeleteFile(const string& file){
+		Status res;
+		if(unlink(file.c_str()) != 0){
+			res = IOError(file,errno);
+		}	
+		return res;
+	}
+

@@ -34,12 +34,35 @@ namespace kvDB
 			}else{
 				
 			}
-		}	
+		}
+			
 	}
 
 	Status DBImpl::NewDB(){
 		VersionEdit new_edit;
+		new_edit.SetLogNumber(0);
+		new_edit.SetNextLogNumber(2);
 		
+		std::string manifest = DescriptorFileName(dbname_,1);
+		WritableFile* file;
+		Status s = env_->NewWritableFile(manifest,&file);
+		if(!s.ok()){
+			return s;
+		}	
+		LogWriter log(file);
+		std::string record;
+		new_edit.Encode(record);
+		s = log.AppendLog(record);
+		if(s.ok()){
+			file->Close();
+		}
+		delete file;
+		if(s.ok()){
+			s = SetCurrentFile(env,dbname_,1);
+		}else{
+			env_->DeleteFile(manifest);
+		}
+		return s;
 	}
 
 	Status DB::Open(Option op,const string& dbname,DB** ptr){
@@ -49,8 +72,7 @@ namespace kvDB
 		Status s = impl->Recover(edit);	
         if(!s.ok()){
             LOG(::common::BUG,"recover error!");
-        }
-		
+        }		
 		
 	}	
         

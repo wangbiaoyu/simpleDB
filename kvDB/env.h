@@ -14,7 +14,8 @@ namespace kvDB
 		Env();
 		~Env();
 		void CreateDir(const string& dbname);
-		void CreateFile(const string& file)
+		void CreateFile(const string& file);
+		void DeleteFile(const string& file);
 	private:
 		
 	};
