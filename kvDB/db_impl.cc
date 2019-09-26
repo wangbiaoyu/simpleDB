@@ -34,8 +34,9 @@ namespace kvDB
 			}else{
 				
 			}
-		}
-			
+		}else{
+            
+	    }		
 	}
 
 	Status DBImpl::NewDB(){
