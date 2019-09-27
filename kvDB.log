@@ -1,19 +1,19 @@
 kvDB
-
+				
 current 存的是manifest的当前id，manifest是版本信息，包括如下：
 	所有版本的k的范围，所属的level ,增量文件
 打开一个db流程：
 	判断db存在状况，已存在，打开
 	不存在，恢复db,db句柄应该含有的状态信息
-		
+	Recover（）
+							
 	dbname_的db路径
 	文件的Sequence需要设置
 	version|版本的信息
 	mem,immu需要有句柄
 写一个kv record流程：WAL写法
 	先写到log文件，再写到mem,
-	
-	
+											
 取一个kv record流程：
 	先从mem取，再从version中取
 function:open,get,put
@@ -21,9 +21,23 @@ section:
 	db_env: 增删该查 文件，append
 	memory: (two buffer)skiplist,|find key|
 	disk:log file
-
+	version_set:(有多个versionedit,filemeta,block) double_linklist
+		1.先读CurrentFile,
+		2.再读manifest,把version信息读入versionset log_reader 函数，
+		versionset 读取 record 其信息存入 包括一个一个version0 + versionedit = version1
+			
+			version : double linklist,filemetadata,
+		
+			VersionEdit: 当前version 文件集
+			table_cache|FileSeq,FileAndTable [{LRU}table-->sst,file],
+			block_cache|date filemeta footer			
+			version| record|   
+							
+		LogReader 读取version信息 v_set读取块，VersionEdit->FileMeta 
+			env_ 读该文件，
+			
 一.open function(option,dbname,db ptr):
+				
 		
 	
-
 	

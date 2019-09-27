@@ -35,8 +35,14 @@ namespace kvDB
 				
 			}
 		}else{
-            
+        	if(option.error_if_exist){
+				
+			}    
 	    }		
+		s = version_->Recover();
+		if(s.ok()){
+			
+		}
 	}
 
 	Status DBImpl::NewDB(){
@@ -74,7 +80,7 @@ namespace kvDB
         if(!s.ok()){
             LOG(::common::BUG,"recover error!");
         }		
-		
+			
 	}	
         
 }

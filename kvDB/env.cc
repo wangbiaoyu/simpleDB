@@ -26,4 +26,24 @@ namespace kvDB
 		}	
 		return res;
 	}
+	
+	Status Env::GetManifestFileName(const string& dbname,string& manifest){
+		Status s;
+		file* fp = fopen(CurrentFile(),"r");
+		if(!fp) { s = IOError("",errno); }
+		const char buf[81];
+		if(fgets(buf,fp) == NULL） { s = IOError("",errno); }
+		std::string tmp(buf,strlen(fp));
+		manifest = tmp;
+		return s; 
+	}
 
+	Status Env::FileExist(const std::string& filename){
+		Status s;
+		if(access(filename.c_str(),F_OK) != 0){
+			s = IOError("Invalid filename %s",errno);
+		}
+		return s;
+	}
+
+}

@@ -12,6 +12,7 @@ namespace kvDB
 	class VersionEdit{
 		
 	public:
+
 		VersionEdit() { Clear(); }
 		void Clear();
 		void SetLogNumber(SequenceNumber num);
@@ -24,4 +25,5 @@ namespace kvDB
 		SequenceNumber log_number_;
 		SequenceNumber next_log_number_;
 	};
+
 }
