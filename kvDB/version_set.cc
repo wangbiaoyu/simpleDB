@@ -3,8 +3,9 @@
  *2019-9-27 wby
  *
  ***/
-
+#include <string>
 #include "version_set.h"
+#include "log_reader.h"
 
 namespace kvDB
 {
@@ -22,6 +23,12 @@ namespace kvDB
 		std::string manifest;
 		s = env_->GetManifestFileName(dbname_,manifest);
 		if(!s.ok()) { }
-		s = env_->
+		File* file;
+		Slice* save;
+		s = env_->NewSequenceFile(file);
+		LogReader reader(file,true,0);
+		while(reader.NextBlock(save)){
+			//aynalsis v_set;		
+		}
 	}
 }

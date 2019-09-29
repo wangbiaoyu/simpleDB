@@ -34,8 +34,8 @@ section:
 			version| record|   
 							
 		LogReader 读取version信息 v_set读取块，VersionEdit->FileMeta 
-			env_ 读该文件，
-			
+			env_ 找到文件，读取文件，
+	protocal: head | data --> { RecordType{} (1bit) size (uint32_t) | data }
 一.open function(option,dbname,db ptr):
 				
 		
