@@ -47,8 +47,17 @@ namespace kvDB
 
 	ReadType LogReader::ReadPhyscalRecord(std::string& record){
 		Status s;
-		while(initial_offest_ < end_offest_){
-			s = file_->Read()		 	
+		while(true){
+					
+			s = file_->Read(buffer_,kBlockSize);
+			end_offest_ += buffer_.size();
+			if(!s.ok()) { }
+			else if(buffer_.size() < kBlockSize){
+				return kLastType;
+			}else{
+						
+			}	
+							 	
 		}
 	}
 }
