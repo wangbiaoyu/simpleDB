@@ -25,10 +25,34 @@ namespace kvDB
 		if(!s.ok()) { }
 		File* file;
 		Slice* save;
-		s = env_->NewSequenceFile(file);
+		VersionSetBuilder build(this);
+		s = env_->NewSequenceFile(file,manifest);
 		LogReader reader(file,true,0);
 		while(reader.NextBlock(save)){
-			//aynalsis v_set;		
+			VersionEdit edit;
+			s = edit.Decode(save);	
+			if(!s.ok()) {}
+			else{
+				build.apply(edit);
+			}								
 		}
 	}
+
+class VersionSetBuilder{
+	//字典升序
+	public:
+		VersionSetBuilder(VersionSet* v_set) ： v_set_(v_set)
+		{
+			
+		}
+
+		void apply(VersionEdit edit){
+			
+		}
+
+	private:
+		VersionSet v_set_；
+	
+}
+
 }

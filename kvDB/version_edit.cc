@@ -24,4 +24,8 @@ namespace kvDB
 			
 	}
 
+	void VersionEdit::Decode(const std::string& ver){
+		
+	}
+
 }

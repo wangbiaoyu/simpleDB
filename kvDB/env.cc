@@ -45,5 +45,9 @@ namespace kvDB
 		}
 		return s;
 	}
+	
+	Status Env::NewSequenceFile(SequenceFile* file,std::string filename){
+		
+	}
 
 }
