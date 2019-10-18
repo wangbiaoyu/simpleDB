@@ -41,18 +41,34 @@ namespace kvDB
 class VersionSetBuilder{
 	//字典升序
 	public:
-		VersionSetBuilder(VersionSet* v_set) ： v_set_(v_set)
+		
+		
+	
+		struct AscInternalKey{
+			InternalKeyCompator* cmp_;
+			bool operator()(FileMetaData* f1,FileMetaData* f2){
+				return cmp_->Compare(f1->smallest,f2->smallest);
+			}
+		};
+
+		VersionSetBuilder(VersionSet* v_set,Version* current)
+		:	v_set_(v_set)
+		,	current_(current)
 		{
-			
+			for(int level = 0; level < config::kLevelNum; level++){
+						
+			}
 		}
 
+
 		void apply(VersionEdit edit){
-			
+							
 		}
 
 	private:
-		VersionSet v_set_；
 	
+		VersionSet* v_set_；
+		Version* current_;
 }
 
 }

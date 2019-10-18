@@ -37,7 +37,16 @@ section:
 			env_ 找到文件，读取文件，
 	protocal: head | data --> { RecordType{} (1bit) size (uint32_t) | data }
 一.open function(option,dbname,db ptr):
-				
-		
+
+1.分析怎么查找文件，先从version中找到 它的范围，然后再找它对应的文件，再找到那条key,
+2.如果是db存在旧文件，恢复各个文件的元信息，
+总结：存储记录，还需存储文件的元信息，需要独立开来吧
+3.now我现在把记录读取出来了，然后进行版本编码解码	
+	version: 
+	versionedit:meta info ,new_file_,delete_files_,comparetor
+	versionset:
 	
+	versionsetbuilder:当前version /set, 初始化，添加,慢慢学
+	filemeta的数据结构	
+	interl
 	
