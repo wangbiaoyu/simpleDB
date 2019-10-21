@@ -24,6 +24,11 @@ namespace kvDB
 		bool has_next_log_number;
 		SequenceNumber log_number_;
 		SequenceNumber next_log_number_;
+		
+		typedef std::set<std::pair<int,uint64_t>> DeletedFileSet;	
+		std::vector<std::pair<int,InternalKey>> compact_pointers_;
+		DeletedFileSet deleted_files_;
+		std::vector< std::pair<int, FileMetaData> > new_files_;
 	};
 
 }

@@ -17,7 +17,7 @@ namespace kvDB
 		VersionSet(const std::string& dbname, Env* env,TableCache* table);
 		Status Recover();
 		Status AppendVersion(Version* version);
-		
+		void MarkFileNumberUsed(uint64_t number);
 			
 	private:
 		const std::string& dbname_;
@@ -32,7 +32,15 @@ namespace kvDB
 		Version(VersionSet* ver_set);
 
 	private:
+		uint64_t next_file_number_;
+		uint64_t manifest_file_number_;
+		uint64_t log_number_;
+		uint64_t pre_log_number_;
+		SequenceNumber last_sequence_;
+		
+		Version* current_;
 		Version* pre_;
 		Version* next_;
+		InternalCompator* internal_cmp_;
 	};
 }	

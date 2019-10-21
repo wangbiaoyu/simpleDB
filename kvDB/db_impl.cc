@@ -19,7 +19,7 @@ namespace kvDB
 	,	mem_(new MemTable())
 	, 	imm_(NULL)   
 	{
-						
+		v_set_ = new VersionSet(dbname_,env_,table_,icmp);					
 	}
 
 	Status DBImpl::Recover(VertionEdit edit){

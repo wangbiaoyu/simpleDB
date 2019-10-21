@@ -24,7 +24,13 @@ namespace kvDB
 
 	private:
 		Status NewDB();
-		
-		
+
+	private:
+		Env* env_;
+		const std::string dbname_;		
+		MemTable* mem_;
+		MemTable* imm_;
+		InternalKeyCompator* icmp_;
+		VersionSet* v_set_;
 	};
 }
