@@ -50,6 +50,7 @@ public:
 
 namespace config{
 	static int kLevelNums = 7;
+	
 	//static int kFile
 }
 

@@ -41,7 +41,31 @@ namespace kvDB
 	    }		
 		s = version_->Recover();
 		if(s.ok()){
-			
+			SequenceNumber max_sequence = 0;
+			const uint64_t min_log = versions_->LogNumber();
+			const uint64_t prev_log = versions_->PrevLogNumber();
+			std::vector<std::string> filenames;
+			s = env_->GetChildren(dbname_,&filenames);
+			if(!s.ok()){
+				return s;
+			}
+			std::set<uint64_t> expected;
+			versions_->AddLiveFiles(&expected);
+			uint64_t number;
+			FileType type;
+			std::vector<uint64_t> logs;
+			for(size_t i = 0; i < filenames.size();i++){
+				if(ParseFileName(filenames[i],&number,&type)){
+					expected.erase(number);
+				}
+				if(type == kLogFile && ((number >= min_log) || (number == prev_log))){
+					logs.push_back(number);
+				}
+			}
+			if(!expected.empty()){
+
+			}
+			std::sort(logs.begin(),logs.end());
 		}
 	}
 

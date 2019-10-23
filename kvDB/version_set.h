@@ -18,6 +18,8 @@ namespace kvDB
 		Status Recover();
 		Status AppendVersion(Version* version);
 		void MarkFileNumberUsed(uint64_t number);
+		Finalize(Version* v);
+		
 			
 	private:
 		const std::string& dbname_;
@@ -38,6 +40,9 @@ namespace kvDB
 		uint64_t pre_log_number_;
 		SequenceNumber last_sequence_;
 		
+		std::vector<FileMetaData*> files_[config::kNumLevels];
+		std::vector<uint64_t> deleted_files_;
+
 		Version* current_;
 		Version* pre_;
 		Version* next_;
