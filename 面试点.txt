@@ -1,0 +1,9 @@
+mysql:
+1.Mysql问题一致,commands out sync  出现2014代码
+ 
+
+2.风控系统sql优化，系统数据初始化
+   前台导入数据库，sql优化(增量)，子查询
+
+
+
