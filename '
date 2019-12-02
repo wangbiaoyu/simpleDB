@@ -1,0 +1,14 @@
+#!/bin/sh
+
+telnet smtp.qq.com 25
+
+#sleep 1
+echo "helo wwwangby"
+sleep 1
+echo "STARTTLS auth login"
+sleep 1
+echo "auth login"
+sleep 1
+echo "MTAxNzY3ODg3MQ=="
+sleep 1
+echo "d3d3YW5nYnk2NjY="

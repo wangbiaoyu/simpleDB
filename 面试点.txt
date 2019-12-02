@@ -5,5 +5,8 @@ mysql:
 2.风控系统sql优化，系统数据初始化
    前台导入数据库，sql优化(增量)，子查询
 
+ELECT l.auto_id,l.user_id,r.login_name,r.user_name,l.group_id,t.group_name,l.create_time,l.update_user_id,l.update_time FROM  ykcz_t_auth_user_group_relation l 
+    left join ykcz_t_auth_user r on l.user_id = r.user_id left join ykcz_t_auth_group t on l.group_id = t.group_id
 
 
+3.内存问题，临时对象的地址放到消息队列中，取出来的时候数据出现问题，指针多个函数传递问题，指针忘记释放
