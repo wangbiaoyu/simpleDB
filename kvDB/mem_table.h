@@ -14,9 +14,8 @@ namespace kvDB
     
     public:
         memTable();
-
         
     private:
-        
+    					    
     };
 }
